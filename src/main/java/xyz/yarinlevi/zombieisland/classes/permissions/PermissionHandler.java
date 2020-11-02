@@ -1,4 +1,4 @@
-package xyz.yarinlevi.zombieisland.permissions;
+package xyz.yarinlevi.zombieisland.classes.permissions;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

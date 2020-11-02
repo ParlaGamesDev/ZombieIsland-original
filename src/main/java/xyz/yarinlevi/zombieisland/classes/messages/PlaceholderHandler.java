@@ -1,4 +1,4 @@
-package xyz.yarinlevi.zombieisland.messages;
+package xyz.yarinlevi.zombieisland.classes.messages;
 
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.entity.Player;

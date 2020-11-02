@@ -1,4 +1,4 @@
-package xyz.yarinlevi.zombieisland.messages;
+package xyz.yarinlevi.zombieisland.classes.messages;
 
 import lombok.Getter;
 import me.clip.placeholderapi.PlaceholderAPI;
