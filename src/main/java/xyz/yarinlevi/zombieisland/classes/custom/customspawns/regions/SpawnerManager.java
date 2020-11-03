@@ -17,7 +17,7 @@ import java.util.stream.Stream;
 public class SpawnerManager {
     @Getter private static final ArrayList<Material> INVALID_MATERIALS = new ArrayList<>();
 
-    public static void injectInvalidBlocks() {
+    private static void injectInvalidBlocks() {
         Stream.of(
                 Material.ACACIA_LEAVES,
                 Material.BIRCH_LEAVES,
@@ -36,6 +36,8 @@ public class SpawnerManager {
     }
 
     public static void registerSpawners() {
+        injectInvalidBlocks();
+
         for (Region region : RegionHandler.getRegions().keySet()) {
             Mob mob = RegionHandler.getRegions().get(region);
             final Location[] randomLocation = new Location[1];

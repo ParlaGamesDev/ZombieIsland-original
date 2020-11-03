@@ -66,9 +66,6 @@ public final class ZombieIsland extends JavaPlugin {
         permissionHandler = new PermissionHandler(instance);
         this.getServer().getPluginManager().registerEvents(permissionHandler, this);
 
-        //Spawner injections
-        SpawnerManager.injectInvalidBlocks();
-
         // Data initialization
         this.initializeData();
 
