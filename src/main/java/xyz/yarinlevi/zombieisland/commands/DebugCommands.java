@@ -1,10 +1,8 @@
 package xyz.yarinlevi.zombieisland.commands;
 
-import co.aikar.commands.BaseCommand;
-import co.aikar.commands.annotation.CommandAlias;
-import co.aikar.commands.annotation.CommandPermission;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -13,12 +11,10 @@ import xyz.yarinlevi.zombieisland.classes.custom.customspawns.entities.types.Mob
 import xyz.yarinlevi.zombieisland.classes.custom.customspawns.helpers.CustomTiers;
 import xyz.yarinlevi.zombieisland.classes.custom.customspawns.regions.RegionHandler;
 
-public class DebugCommands extends BaseCommand {
+public class DebugCommands implements CommandExecutor {
     //TODO: Replace messages to new system
 
 
-    @CommandAlias("zidebug")
-    @CommandPermission("zombieisland.debug")
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(!(sender instanceof Player)) {
             sender.sendMessage("you're not a player go away lol");

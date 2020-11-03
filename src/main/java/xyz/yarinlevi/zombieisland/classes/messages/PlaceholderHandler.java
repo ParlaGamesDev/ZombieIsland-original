@@ -42,6 +42,9 @@ public class PlaceholderHandler extends PlaceholderExpansion {
         if(player == null){
             return "";
         }
+        if (identifier.equalsIgnoreCase("version")) {
+            return ZombieIsland.getInstance().getDescription().getVersion();
+        }
 
         return null;
     }

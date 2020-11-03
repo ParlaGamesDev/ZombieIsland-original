@@ -1,0 +1,32 @@
+package xyz.yarinlevi.zombieisland.classes.custom.swords.utils;
+
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+
+import java.util.Random;
+
+public class Utils {
+    /**
+     * Calculates chances.
+     * @param max highest number. e.g. 1 in 100
+     * @return
+     */
+    public static boolean calculateChance(int max) {
+        Random rand = new Random();
+        return rand.nextInt(max)==1;
+    }
+
+    public static ItemStack createItem(final Material material, final int amount, final String name) {
+        final ItemStack item = new ItemStack(material, amount);
+        final ItemMeta meta = item.getItemMeta();
+
+        meta.setDisplayName(name);
+
+        meta.setUnbreakable(true);
+
+        item.setItemMeta(meta);
+
+        return item;
+    }
+}

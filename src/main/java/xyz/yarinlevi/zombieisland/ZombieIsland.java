@@ -1,11 +1,9 @@
 package xyz.yarinlevi.zombieisland;
 
-import co.aikar.commands.BukkitCommandManager;
-import com.zaxxer.hikari.HikariDataSource;
 import lombok.Getter;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import xyz.yarinlevi.zombieisland.classes.FileManager;
 import xyz.yarinlevi.zombieisland.classes.Settings;
@@ -13,21 +11,19 @@ import xyz.yarinlevi.zombieisland.classes.custom.customspawns.helpers.CustomMobs
 import xyz.yarinlevi.zombieisland.classes.custom.customspawns.helpers.CustomTiers;
 import xyz.yarinlevi.zombieisland.classes.custom.customspawns.regions.RegionHandler;
 import xyz.yarinlevi.zombieisland.classes.custom.customspawns.regions.SpawnerManager;
-import xyz.yarinlevi.zombieisland.classes.custom.skills.types.Combat;
+import xyz.yarinlevi.zombieisland.classes.custom.swords.ZiSwordsCommand;
+import xyz.yarinlevi.zombieisland.classes.custom.swords.listeners.EntityDamagedEvent;
+import xyz.yarinlevi.zombieisland.classes.custom.swords.listeners.PlayerItemHeldChange;
+import xyz.yarinlevi.zombieisland.classes.listeners.EntityCombust;
+import xyz.yarinlevi.zombieisland.classes.listeners.OnPlayerJoin;
 import xyz.yarinlevi.zombieisland.classes.messages.MessageHandler;
 import xyz.yarinlevi.zombieisland.classes.messages.PlaceholderHandler;
 import xyz.yarinlevi.zombieisland.classes.permissions.PermissionHandler;
 import xyz.yarinlevi.zombieisland.commands.AdminOnlyCommands;
 import xyz.yarinlevi.zombieisland.commands.DebugCommands;
-import xyz.yarinlevi.zombieisland.commands.MainCommand;
 import xyz.yarinlevi.zombieisland.commands.TestMessages;
-import xyz.yarinlevi.zombieisland.player.data.Data;
 
 import java.io.File;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.stream.Stream;
 
 public final class ZombieIsland extends JavaPlugin {
     @Getter private static ZombieIsland instance;
@@ -36,11 +32,21 @@ public final class ZombieIsland extends JavaPlugin {
     @Getter private Settings settings;
 
     @Getter private final String version = getDescription().getVersion();
-    @Getter private static String prefix;
-    private HikariDataSource dataSource;
-    @Getter private String table;
-    @Getter private Connection connection;
 
+    //Swords
+    @Getter private int kopakaSlownessDuration;
+    @Getter private int kopakaSlownessAmplifier;
+    @Getter private int poisonWandDuration;
+    @Getter private int poisonWandAmplifier;
+    @Getter private int fireSwordBurn;
+    @Getter private String stormBreaker;
+    @Getter private String kopaka;
+    @Getter private String fireSword;
+    @Getter private String poisonWand;
+    @Getter private String stormBreaker_Material;
+    @Getter private String kopaka_Material;
+    @Getter private String fireSword_Material;
+    @Getter private String poisonWand_Material;
 
     @Override
     public void onEnable() {
@@ -59,9 +65,6 @@ public final class ZombieIsland extends JavaPlugin {
         permissionHandler = new PermissionHandler(instance);
         this.getServer().getPluginManager().registerEvents(permissionHandler, this);
 
-        // MySql Initialization
-        initializeMySql();
-
         //Spawner injections
         SpawnerManager.injectInvalidBlocks();
 
@@ -71,15 +74,23 @@ public final class ZombieIsland extends JavaPlugin {
         //PlaceholderAPI registration
         if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) new PlaceholderHandler(this).register();
 
-        //Skill initialization
-        new Combat();
+        registerSwordData();
 
-        BukkitCommandManager commandManager = new BukkitCommandManager(this);
-        Stream.of(
-                new AdminOnlyCommands(),
-                new DebugCommands(),
-                new MainCommand()
-        ).forEach(commandManager::registerCommand);
+        Listener[] listeners = new Listener[] {
+                new EntityDamagedEvent(),
+                new OnPlayerJoin(),
+                new EntityCombust(),
+                new PlayerItemHeldChange()
+        };
+        for (Listener listener : listeners) {
+            getServer().getPluginManager().registerEvents(listener, this);
+        }
+
+
+        getCommand("ziadmin").setExecutor(new AdminOnlyCommands());
+        getCommand("zidebug").setExecutor(new DebugCommands());
+        getCommand("testmessages").setExecutor(new TestMessages());
+        getCommand("ziswords").setExecutor(new ZiSwordsCommand());
 
         SpawnerManager.registerSpawners();
     }
@@ -87,7 +98,6 @@ public final class ZombieIsland extends JavaPlugin {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
-        save();
     }
 
     private void initializeData() {
@@ -114,48 +124,24 @@ public final class ZombieIsland extends JavaPlugin {
         RegionHandler.loadRegions();
     }
 
+    public void registerSwordData() {
+        kopakaSlownessAmplifier = getConfig().getInt("kopaka_slowness_amplifier");
+        kopakaSlownessDuration = getConfig().getInt("kopaka_slowness_duration");
 
-    private void initializeMySql() {
-        String hostName = getConfig().getString("MySql_Hostname");
-        table = getConfig().getString("MySql_TableName");
-        String database = getConfig().getString("MySql_Database");
-        int port = getConfig().getInt("MySql_Port");
-        String user = getConfig().getString("MySql_User");
-        String pass = getConfig().getString("MySql_Password");
-        boolean ssl = getConfig().getBoolean("MySql_UseSSL");
+        poisonWandAmplifier = getConfig().getInt("poisonWand_poison_amplifier");
+        poisonWandDuration = getConfig().getInt("poisonWand_poison_duration");
 
-        prefix = ChatColor.translateAlternateColorCodes('&', getConfig().getString("Prefix"));
+        fireSwordBurn = getConfig().getInt("Fire_Sword_Burn");
 
-        dataSource = new HikariDataSource();
+        stormBreaker_Material = getConfig().getString("StormBreaker_Item");
+        fireSword_Material = getConfig().getString("FireSword_Item");
+        kopaka_Material = getConfig().getString("Kopaka_Item");
+        poisonWand_Material = getConfig().getString("PoisonWand_Item");
 
-        dataSource.setDataSourceClassName("com.mysql.jdbc.jdbc2.optional.MysqlDataSource");
-        dataSource.addDataSourceProperty("serverName", hostName);
-        dataSource.addDataSourceProperty("port", port);
-        dataSource.addDataSourceProperty("databaseName", database);
-        dataSource.addDataSourceProperty("user", user);
-        dataSource.addDataSourceProperty("password", pass);
-        dataSource.addDataSourceProperty("useSSL", ssl);
-
-        String sql = String.format("CREATE TABLE IF NOT EXISTS `%s` (`PlayerName` TEXT, `PlayerUUID` TEXT, `COMBAT_EXPERIENCE` INT);", table);
-
-        Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    getLogger().warning("Please await mysql hook...");
-                    connection = dataSource.getConnection();
-                    Statement statement = connection.createStatement(); {
-                        statement.executeUpdate(sql);
-                    }
-                    getLogger().info("MySQL Hooked!");
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
-                }
-            }
-        });
+        stormBreaker = net.md_5.bungee.api.ChatColor.translateAlternateColorCodes('&', getConfig().getString("StormBreaker"));
+        fireSword = net.md_5.bungee.api.ChatColor.translateAlternateColorCodes('&',getConfig().getString("FireSword"));
+        kopaka = net.md_5.bungee.api.ChatColor.translateAlternateColorCodes('&', getConfig().getString("Kopaka"));
+        poisonWand = net.md_5.bungee.api.ChatColor.translateAlternateColorCodes('&', getConfig().getString("PoisonWand"));
     }
 
-    public void save() {
-        Data.updateAllUsers();
-    }
 }

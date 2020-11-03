@@ -10,7 +10,6 @@ import org.bukkit.inventory.ItemStack;
 import xyz.yarinlevi.zombieisland.classes.custom.customspawns.entities.types.Mob;
 import xyz.yarinlevi.zombieisland.classes.custom.customspawns.entities.types.Tier;
 
-
 import java.util.HashMap;
 
 public class Handler {
