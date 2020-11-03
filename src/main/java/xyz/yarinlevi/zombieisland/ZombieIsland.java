@@ -14,6 +14,7 @@ import xyz.yarinlevi.zombieisland.classes.custom.customspawns.regions.SpawnerMan
 import xyz.yarinlevi.zombieisland.classes.custom.swords.ZiSwordsCommand;
 import xyz.yarinlevi.zombieisland.classes.custom.swords.listeners.EntityDamagedEvent;
 import xyz.yarinlevi.zombieisland.classes.custom.swords.listeners.PlayerItemHeldChange;
+import xyz.yarinlevi.zombieisland.classes.custom.swords.listeners.PlayerItemHeldChange2;
 import xyz.yarinlevi.zombieisland.classes.listeners.EntityCombust;
 import xyz.yarinlevi.zombieisland.classes.listeners.OnPlayerJoin;
 import xyz.yarinlevi.zombieisland.classes.messages.MessageHandler;
@@ -80,6 +81,7 @@ public final class ZombieIsland extends JavaPlugin {
                 new EntityDamagedEvent(),
                 new OnPlayerJoin(),
                 new EntityCombust(),
+                new PlayerItemHeldChange2(),
                 new PlayerItemHeldChange()
         };
         for (Listener listener : listeners) {
