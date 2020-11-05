@@ -11,6 +11,7 @@ import xyz.yarinlevi.zombieisland.classes.custom.customspawns.helpers.CustomMobs
 import xyz.yarinlevi.zombieisland.classes.custom.customspawns.helpers.CustomTiers;
 import xyz.yarinlevi.zombieisland.classes.custom.customspawns.regions.RegionHandler;
 import xyz.yarinlevi.zombieisland.classes.custom.customspawns.regions.SpawnerManager;
+import xyz.yarinlevi.zombieisland.classes.custom.newswords.ZiSwordsHandler;
 import xyz.yarinlevi.zombieisland.classes.custom.swords.ZiSwordsCommand;
 import xyz.yarinlevi.zombieisland.classes.custom.swords.listeners.EntityDamagedEvent;
 import xyz.yarinlevi.zombieisland.classes.custom.swords.listeners.PlayerItemHeldChange;
@@ -31,23 +32,13 @@ public final class ZombieIsland extends JavaPlugin {
     @Getter private PermissionHandler permissionHandler;
     @Getter private MessageHandler messageHandler;
     @Getter private Settings settings;
+    @Getter private ZiSwordsHandler swordsHandler;
 
     @Getter private final String version = getDescription().getVersion();
 
     //Swords
-    @Getter private int kopakaSlownessDuration;
-    @Getter private int kopakaSlownessAmplifier;
-    @Getter private int poisonWandDuration;
-    @Getter private int poisonWandAmplifier;
-    @Getter private int fireSwordBurn;
-    @Getter private String stormBreaker;
-    @Getter private String kopaka;
-    @Getter private String fireSword;
-    @Getter private String poisonWand;
-    @Getter private String stormBreaker_Material;
-    @Getter private String kopaka_Material;
-    @Getter private String fireSword_Material;
-    @Getter private String poisonWand_Material;
+    @Getter private int kopakaSlownessDuration, kopakaSlownessAmplifier, poisonWandDuration, poisonWandAmplifier, fireSwordBurn;
+    @Getter private String stormBreaker, kopaka, fireSword, poisonWand, stormBreaker_Material, kopaka_Material, fireSword_Material, poisonWand_Material;
 
     @Override
     public void onEnable() {
@@ -56,6 +47,7 @@ public final class ZombieIsland extends JavaPlugin {
 
         this.saveDefaultConfig();
         saveResource("messages.yml", false);
+        saveResource("swords.yml", false);
 
         settings = new Settings();
 

@@ -34,7 +34,7 @@ public class PlaceholderHandler extends PlaceholderExpansion {
 
     @Override
     public @NotNull String getVersion() {
-        return instance.getDescription().getVersion();
+        return instance.getVersion();
     }
 
     @Override
@@ -46,6 +46,6 @@ public class PlaceholderHandler extends PlaceholderExpansion {
             return ZombieIsland.getInstance().getDescription().getVersion();
         }
 
-        return null;
+        return "";
     }
 }

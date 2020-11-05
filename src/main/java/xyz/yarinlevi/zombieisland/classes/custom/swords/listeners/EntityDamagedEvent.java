@@ -47,7 +47,6 @@ public class EntityDamagedEvent implements org.bukkit.event.Listener {
                 } else if (item.getType().equals(Material.getMaterial(ZombieIsland.getInstance().getKopaka_Material()))) {
                     if (item.getItemMeta().getDisplayName().equals(ZombieIsland.getInstance().getKopaka())) {
                         //Testing.broadcastTest("Test_Kopaka 1");
-
                         PotionEffect slowness = new PotionEffect(PotionEffectType.SLOW, (20 * ZombieIsland.getInstance().getKopakaSlownessDuration()), ZombieIsland.getInstance().getKopakaSlownessAmplifier());
                         //Testing.broadcastTest("Test_Kopaka 2");
                         entity.addPotionEffect(slowness);
