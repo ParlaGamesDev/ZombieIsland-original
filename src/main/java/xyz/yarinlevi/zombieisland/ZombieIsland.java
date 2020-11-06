@@ -32,7 +32,7 @@ public final class ZombieIsland extends JavaPlugin {
     @Getter private PermissionHandler permissionHandler;
     @Getter private MessageHandler messageHandler;
     @Getter private Settings settings;
-    @Getter private ZiSwordsHandler swordsHandler;
+    @Getter private ZiSwordsHandler ziSwordsHandler;
 
     @Getter private final String version = getDescription().getVersion();
 
@@ -65,6 +65,8 @@ public final class ZombieIsland extends JavaPlugin {
         if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) new PlaceholderHandler(this).register();
 
         registerSwordData();
+        ziSwordsHandler = new ZiSwordsHandler();
+
 
         Listener[] listeners = new Listener[] {
                 new EntityDamagedEvent(),
@@ -83,7 +85,7 @@ public final class ZombieIsland extends JavaPlugin {
         getCommand("testmessages").setExecutor(new TestMessages());
         getCommand("ziswords").setExecutor(new ZiSwordsCommand());
 
-        SpawnerManager.registerSpawners();
+        //SpawnerManager.registerSpawners();
     }
 
     @Override

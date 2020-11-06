@@ -14,7 +14,7 @@ import xyz.yarinlevi.zombieisland.external.skills.AureliumSkillsHandler;
 
 public class PlayerItemHeldChange2 implements Listener {
     
-    @EventHandler(priority = EventPriority.LOWEST)
+    @EventHandler(priority = EventPriority.HIGH)
     public void PlayerItemHeld(PlayerItemHeldEvent event) {
         Player player = event.getPlayer();
         ItemStack item = player.getInventory().getItem(event.getPreviousSlot());
@@ -29,15 +29,21 @@ public class PlayerItemHeldChange2 implements Listener {
                 }
             } else if (item.getType().equals(Material.getMaterial(ZombieIsland.getInstance().getKopaka_Material()))) {
                 if (item.getItemMeta().getDisplayName().equals(ZombieIsland.getInstance().getKopaka())) {
-                    AureliumSkillsHandler.removeModifier(player, "KOPAKA");
+                    if (AureliumSkillsHandler.isMeetLevelRequirement(player, Skill.FIGHTING, 5)) {
+                        AureliumSkillsHandler.removeModifier(player, "KOPAKA");
+                    }
                 }
             } else if (item.getType().equals(Material.getMaterial(ZombieIsland.getInstance().getFireSword_Material()))) {
                 if (item.getItemMeta().getDisplayName().equals(ZombieIsland.getInstance().getFireSword())) {
-                    AureliumSkillsHandler.removeModifier(player, "FIRESWORD");
+                    if (AureliumSkillsHandler.isMeetLevelRequirement(player, Skill.FIGHTING, 5)) {
+                        AureliumSkillsHandler.removeModifier(player, "FIRESWORD");
+                    }
                 }
             } else if (item.getType().equals(Material.getMaterial(ZombieIsland.getInstance().getPoisonWand_Material()))) {
                 if (item.getItemMeta().getDisplayName().equals(ZombieIsland.getInstance().getPoisonWand())) {
-                    AureliumSkillsHandler.removeModifier(player, "POISONWAND");
+                    if (AureliumSkillsHandler.isMeetLevelRequirement(player, Skill.FIGHTING, 5)) {
+                        AureliumSkillsHandler.removeModifier(player, "POISONWAND");
+                    }
                 }
             }
         }

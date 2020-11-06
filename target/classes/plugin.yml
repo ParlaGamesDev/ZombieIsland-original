@@ -1,5 +1,5 @@
 name: ZombieIsland
-version: 0.2.3-EXPERIMENTAL
+version: 0.2.4-EXPERIMENTAL
 main: xyz.yarinlevi.zombieisland.ZombieIsland
 api-version: 1.16
 depend:
