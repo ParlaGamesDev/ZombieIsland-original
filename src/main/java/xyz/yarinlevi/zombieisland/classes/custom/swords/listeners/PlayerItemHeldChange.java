@@ -1,22 +1,15 @@
 package xyz.yarinlevi.zombieisland.classes.custom.swords.listeners;
 
-import com.archyx.aureliumskills.api.AureliumAPI;
 import com.archyx.aureliumskills.skills.Skill;
 import com.archyx.aureliumskills.stats.Stat;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Skeleton;
-import org.bukkit.entity.Zombie;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 import xyz.yarinlevi.zombieisland.ZombieIsland;
-import xyz.yarinlevi.zombieisland.classes.custom.swords.utils.Utils;
 import xyz.yarinlevi.zombieisland.external.skills.AureliumSkillsHandler;
 
 public class PlayerItemHeldChange implements Listener {

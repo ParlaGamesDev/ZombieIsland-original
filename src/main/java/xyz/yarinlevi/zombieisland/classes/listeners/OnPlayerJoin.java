@@ -6,8 +6,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import xyz.yarinlevi.zombieisland.ZombieIsland;
 
-import java.sql.SQLException;
-
 public class OnPlayerJoin implements Listener {
 
     @EventHandler

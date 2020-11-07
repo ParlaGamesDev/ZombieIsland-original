@@ -10,7 +10,6 @@ import xyz.yarinlevi.zombieisland.classes.Settings;
 import xyz.yarinlevi.zombieisland.classes.custom.customspawns.helpers.CustomMobs;
 import xyz.yarinlevi.zombieisland.classes.custom.customspawns.helpers.CustomTiers;
 import xyz.yarinlevi.zombieisland.classes.custom.customspawns.regions.RegionHandler;
-import xyz.yarinlevi.zombieisland.classes.custom.customspawns.regions.SpawnerManager;
 import xyz.yarinlevi.zombieisland.classes.custom.newswords.ZiSwordsHandler;
 import xyz.yarinlevi.zombieisland.classes.custom.swords.ZiSwordsCommand;
 import xyz.yarinlevi.zombieisland.classes.custom.swords.listeners.EntityDamagedEvent;
@@ -67,9 +66,7 @@ public final class ZombieIsland extends JavaPlugin {
         registerSwordData();
         ziSwordsHandler = new ZiSwordsHandler();
 
-
         Listener[] listeners = new Listener[] {
-                new EntityDamagedEvent(),
                 permissionHandler,
                 new OnPlayerJoin(),
                 new EntityCombust(),

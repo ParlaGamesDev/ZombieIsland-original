@@ -8,33 +8,20 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import xyz.yarinlevi.zombieisland.ZombieIsland;
+import xyz.yarinlevi.zombieisland.classes.custom.newswords.ZiSwordsHandler;
 import xyz.yarinlevi.zombieisland.classes.custom.swords.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ZiSwordsCommand implements CommandExecutor, TabCompleter {
-
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
             if (args[0].equalsIgnoreCase("give")) {
                 if (args.length == 3) {
                     Player t;
                     if ((t = Bukkit.getPlayer(args[1])) != null) {
-                        switch (args[2].toLowerCase()) {
-                            case "stormbreaker":
-                                t.getInventory().addItem(Utils.createItem(Material.getMaterial(ZombieIsland.getInstance().getStormBreaker_Material()), 1, ZombieIsland.getInstance().getStormBreaker()));
-                                break;
-                            case "firesword":
-                                t.getInventory().addItem(Utils.createItem(Material.getMaterial(ZombieIsland.getInstance().getFireSword_Material()), 1, ZombieIsland.getInstance().getFireSword()));
-                                break;
-                            case "kopaka":
-                                t.getInventory().addItem(Utils.createItem(Material.getMaterial(ZombieIsland.getInstance().getKopaka_Material()), 1, ZombieIsland.getInstance().getKopaka()));
-                                break;
-                            case "poisonwand":
-                                t.getInventory().addItem(Utils.createItem(Material.getMaterial(ZombieIsland.getInstance().getPoisonWand_Material()), 1, ZombieIsland.getInstance().getPoisonWand()));
-                                break;
-                        }
+                        t.getInventory().addItem(ZombieIsland.getInstance().getZiSwordsHandler().getSword(args[2].toLowerCase()));
                         sender.sendMessage(String.format("ZiSwords ->> Populated %s's inventory with %s", t.getName(), args[2]));
                         return true;
                     }
@@ -49,39 +36,13 @@ public class ZiSwordsCommand implements CommandExecutor, TabCompleter {
                 if (args.length == 3) {
                     Player t;
                     if ((t = Bukkit.getPlayer(args[1])) != null) {
-                        switch (args[2].toLowerCase()) {
-                            case "stormbreaker":
-                                t.getInventory().addItem(Utils.createItem(Material.getMaterial(ZombieIsland.getInstance().getStormBreaker_Material()), 1, ZombieIsland.getInstance().getStormBreaker()));
-                                break;
-                            case "firesword":
-                                t.getInventory().addItem(Utils.createItem(Material.getMaterial(ZombieIsland.getInstance().getFireSword_Material()), 1, ZombieIsland.getInstance().getFireSword()));
-                                break;
-                            case "kopaka":
-                                t.getInventory().addItem(Utils.createItem(Material.getMaterial(ZombieIsland.getInstance().getKopaka_Material()), 1, ZombieIsland.getInstance().getKopaka()));
-                                break;
-                            case "poisonwand":
-                                t.getInventory().addItem(Utils.createItem(Material.getMaterial(ZombieIsland.getInstance().getPoisonWand_Material()), 1, ZombieIsland.getInstance().getPoisonWand()));
-                                break;
-                        }
+                        t.getInventory().addItem(ZombieIsland.getInstance().getZiSwordsHandler().getSword(args[2].toLowerCase()));
                         p.sendMessage(String.format("ZiSwords ->> Populated %s's inventory with %s", t.getName(), args[2]));
                         return true;
                     }
                     return false;
                 }
-                switch (args[1].toLowerCase()) {
-                    case "stormbreaker":
-                        p.getInventory().addItem(Utils.createItem(Material.getMaterial(ZombieIsland.getInstance().getStormBreaker_Material()), 1, ZombieIsland.getInstance().getStormBreaker()));
-                        break;
-                    case "firesword":
-                        p.getInventory().addItem(Utils.createItem(Material.getMaterial(ZombieIsland.getInstance().getFireSword_Material()), 1, ZombieIsland.getInstance().getFireSword()));
-                        break;
-                    case "kopaka":
-                        p.getInventory().addItem(Utils.createItem(Material.getMaterial(ZombieIsland.getInstance().getKopaka_Material()), 1, ZombieIsland.getInstance().getKopaka()));
-                        break;
-                    case "poisonwand":
-                        p.getInventory().addItem(Utils.createItem(Material.getMaterial(ZombieIsland.getInstance().getPoisonWand_Material()), 1, ZombieIsland.getInstance().getPoisonWand()));
-                        break;
-                }
+                p.getInventory().addItem(ZombieIsland.getInstance().getZiSwordsHandler().getSword(args[1].toLowerCase()));
             }
         }
         return false;
@@ -96,7 +57,7 @@ public class ZiSwordsCommand implements CommandExecutor, TabCompleter {
             list.add("FireSword");
             list.add("StormBreaker");
             list.add("Kopaka");
-            list.add("PoisonWand");
+            list.add("PoisonBlade");
             return list;
         }
         return list;

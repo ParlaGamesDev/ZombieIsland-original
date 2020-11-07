@@ -1,7 +1,6 @@
 package xyz.yarinlevi.zombieisland.classes.custom.swords.listeners;
 
 import com.archyx.aureliumskills.skills.Skill;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
