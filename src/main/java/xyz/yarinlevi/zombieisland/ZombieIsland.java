@@ -11,6 +11,10 @@ import xyz.yarinlevi.zombieisland.classes.custom.customspawns.helpers.CustomMobs
 import xyz.yarinlevi.zombieisland.classes.custom.customspawns.helpers.CustomTiers;
 import xyz.yarinlevi.zombieisland.classes.custom.customspawns.regions.RegionHandler;
 import xyz.yarinlevi.zombieisland.classes.custom.newswords.ZiSwordsHandler;
+import xyz.yarinlevi.zombieisland.classes.custom.newswords.listeners.FireSwordListener;
+import xyz.yarinlevi.zombieisland.classes.custom.newswords.listeners.KopakaListener;
+import xyz.yarinlevi.zombieisland.classes.custom.newswords.listeners.PoisonBladeListener;
+import xyz.yarinlevi.zombieisland.classes.custom.newswords.listeners.StormBreakerListener;
 import xyz.yarinlevi.zombieisland.classes.custom.swords.ZiSwordsCommand;
 import xyz.yarinlevi.zombieisland.classes.custom.swords.listeners.EntityDamagedEvent;
 import xyz.yarinlevi.zombieisland.classes.custom.swords.listeners.PlayerItemHeldChange;
@@ -65,6 +69,16 @@ public final class ZombieIsland extends JavaPlugin {
 
         registerSwordData();
         ziSwordsHandler = new ZiSwordsHandler();
+
+        Listener[] swordListeners = new Listener[] {
+                new StormBreakerListener(),
+                new PoisonBladeListener(),
+                new KopakaListener(),
+                new FireSwordListener()
+        };
+        for (Listener listener : swordListeners) {
+            ZombieIsland.getInstance().getServer().getPluginManager().registerEvents(listener, ZombieIsland.getInstance());
+        }
 
         Listener[] listeners = new Listener[] {
                 permissionHandler,

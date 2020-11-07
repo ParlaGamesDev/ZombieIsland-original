@@ -43,3 +43,4 @@ hs_err_pid*
 .idea/uiDesigner.xml
 .idea/inspectionProfiles/Project_Default.xml
 .idea/libraries/Maven__io_lumine_xikage_MythicMobs_4_9_1.xml
+target/

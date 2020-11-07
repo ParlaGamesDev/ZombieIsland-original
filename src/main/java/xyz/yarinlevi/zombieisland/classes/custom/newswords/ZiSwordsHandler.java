@@ -16,16 +16,6 @@ public class ZiSwordsHandler {
     private final HashMap<String, ItemStack> swords = new HashMap<>();
 
     public ZiSwordsHandler() {
-        Listener[] listeners = new Listener[] {
-          new StormBreakerListener(),
-          new PoisonBladeListener(),
-          new KopakaListener(),
-          new FireSwordListener()
-        };
-        for (Listener listener : listeners) {
-            ZombieIsland.getInstance().getServer().getPluginManager().registerEvents(listener, ZombieIsland.getInstance());
-        }
-
         swords.put("stormbreaker", Utils.createItem(Material.getMaterial(ZombieIsland.getInstance().getStormBreaker_Material()), 1, ZombieIsland.getInstance().getStormBreaker()));
         swords.put("firesword", Utils.createItem(Material.getMaterial(ZombieIsland.getInstance().getFireSword_Material()), 1, ZombieIsland.getInstance().getFireSword()));
         swords.put("kopaka", Utils.createItem(Material.getMaterial(ZombieIsland.getInstance().getKopaka_Material()), 1, ZombieIsland.getInstance().getKopaka()));
