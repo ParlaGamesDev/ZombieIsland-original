@@ -70,6 +70,7 @@ public final class ZombieIsland extends JavaPlugin {
 
         Listener[] listeners = new Listener[] {
                 new EntityDamagedEvent(),
+                permissionHandler,
                 new OnPlayerJoin(),
                 new EntityCombust(),
                 new PlayerItemHeldChange2(),
