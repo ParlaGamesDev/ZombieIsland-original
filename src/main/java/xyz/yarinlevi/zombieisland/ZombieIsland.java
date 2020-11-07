@@ -16,7 +16,6 @@ import xyz.yarinlevi.zombieisland.classes.custom.newswords.listeners.KopakaListe
 import xyz.yarinlevi.zombieisland.classes.custom.newswords.listeners.PoisonBladeListener;
 import xyz.yarinlevi.zombieisland.classes.custom.newswords.listeners.StormBreakerListener;
 import xyz.yarinlevi.zombieisland.classes.custom.swords.ZiSwordsCommand;
-import xyz.yarinlevi.zombieisland.classes.custom.swords.listeners.EntityDamagedEvent;
 import xyz.yarinlevi.zombieisland.classes.custom.swords.listeners.PlayerItemHeldChange;
 import xyz.yarinlevi.zombieisland.classes.custom.swords.listeners.PlayerItemHeldChange2;
 import xyz.yarinlevi.zombieisland.classes.listeners.EntityCombust;

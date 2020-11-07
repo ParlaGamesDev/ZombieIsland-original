@@ -1,15 +1,12 @@
 package xyz.yarinlevi.zombieisland.classes.custom.swords;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import xyz.yarinlevi.zombieisland.ZombieIsland;
-import xyz.yarinlevi.zombieisland.classes.custom.newswords.ZiSwordsHandler;
-import xyz.yarinlevi.zombieisland.classes.custom.swords.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;

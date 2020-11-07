@@ -44,3 +44,4 @@ hs_err_pid*
 .idea/inspectionProfiles/Project_Default.xml
 .idea/libraries/Maven__io_lumine_xikage_MythicMobs_4_9_1.xml
 target/
+.idea/libraries/Maven__de_tr7zw_item_nbt_api_plugin_2_6_0.xml
