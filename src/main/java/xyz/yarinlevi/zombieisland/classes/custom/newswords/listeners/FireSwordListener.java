@@ -12,20 +12,21 @@ import xyz.yarinlevi.zombieisland.external.nbtapi.NBTAPIHandler;
 import xyz.yarinlevi.zombieisland.external.skills.AureliumSkillsHandler;
 
 public class FireSwordListener implements Listener {
-    ItemStack fireSwordItem = ZombieIsland.getInstance().getZiSwordsHandler().getSword("firesword");
-
     @EventHandler
     public void onPlayerHit(EntityDamageByEntityEvent e) {
         if(e.getDamager() instanceof Player) {
 
-            Player attacker = (Player) e.getDamager();
+            Player p = (Player) e.getDamager();
             LivingEntity entity = (LivingEntity) e.getEntity();
 
-            ItemStack item = attacker.getInventory().getItemInMainHand();
+            ItemStack item = p.getInventory().getItemInMainHand();
 
             if (NBTAPIHandler.isItemTagExists(item, "sword.firesword")) {
-                if (AureliumSkillsHandler.isMeetLevelRequirement(attacker, Skill.FIGHTING, 5)) {
+                if (AureliumSkillsHandler.isMeetLevelRequirement(p, Skill.FIGHTING, 5)) {
                     entity.setFireTicks((ZombieIsland.getInstance().getFireSwordBurn() * 20));
+                } else {
+                    ZombieIsland.getInstance().getMessageHandler().sendMessage(p, "level_too_low");
+                    e.setCancelled(true);
                 }
             }
         }

@@ -9,26 +9,28 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
 import xyz.yarinlevi.zombieisland.ZombieIsland;
 import xyz.yarinlevi.zombieisland.classes.custom.swords.utils.Utils;
+import xyz.yarinlevi.zombieisland.classes.messages.MessageHandler;
 import xyz.yarinlevi.zombieisland.external.nbtapi.NBTAPIHandler;
 import xyz.yarinlevi.zombieisland.external.skills.AureliumSkillsHandler;
 
 public class StormBreakerListener implements Listener {
-    ItemStack stormBreakerItem = ZombieIsland.getInstance().getZiSwordsHandler().getSword("stormbreaker");
-
     @EventHandler
     public void onPlayerHit(EntityDamageByEntityEvent e) {
         if(e.getDamager() instanceof Player) {
 
-            Player attacker = (Player) e.getDamager();
+            Player p = (Player) e.getDamager();
             LivingEntity entity = (LivingEntity) e.getEntity();
 
-            ItemStack item = attacker.getInventory().getItemInMainHand();
+            ItemStack item = p.getInventory().getItemInMainHand();
 
             if (NBTAPIHandler.isItemTagExists(item, "sword.stormbreaker")) {
-                if (AureliumSkillsHandler.isMeetLevelRequirement(attacker, Skill.FIGHTING, 5)) {
+                if (AureliumSkillsHandler.isMeetLevelRequirement(p, Skill.FIGHTING, 5)) {
                     if (Utils.calculateChance(3)) {
                         entity.getWorld().strikeLightning(entity.getLocation());
                     }
+                } else {
+                    ZombieIsland.getInstance().getMessageHandler().sendMessage(p, "level_too_low");
+                    e.setCancelled(true);
                 }
             }
         }

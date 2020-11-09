@@ -17,19 +17,17 @@ import xyz.yarinlevi.zombieisland.external.nbtapi.NBTAPIHandler;
 import xyz.yarinlevi.zombieisland.external.skills.AureliumSkillsHandler;
 
 public class PoisonBladeListener implements Listener {
-    ItemStack poisonBladeItem = ZombieIsland.getInstance().getZiSwordsHandler().getSword("poisonblade");
-
     @EventHandler
     public void onPlayerHit(EntityDamageByEntityEvent e) {
         if(e.getDamager() instanceof Player) {
 
-            Player attacker = (Player) e.getDamager();
+            Player p = (Player) e.getDamager();
             LivingEntity entity = (LivingEntity) e.getEntity();
 
-            ItemStack item = attacker.getInventory().getItemInMainHand();
+            ItemStack item = p.getInventory().getItemInMainHand();
 
             if (NBTAPIHandler.isItemTagExists(item, "sword.poisonblade")) {
-                if (AureliumSkillsHandler.isMeetLevelRequirement(attacker, Skill.FIGHTING, 5)) {
+                if (AureliumSkillsHandler.isMeetLevelRequirement(p, Skill.FIGHTING, 5)) {
                     if(Utils.calculateChance(3)) {
                         PotionEffect effect;
                         if (entity instanceof Zombie || entity instanceof Skeleton) {
@@ -43,6 +41,9 @@ public class PoisonBladeListener implements Listener {
                             e.getDamager().sendMessage("applied poison to " + entity.getName());
                         }
                     }
+                } else {
+                    ZombieIsland.getInstance().getMessageHandler().sendMessage(p, "level_too_low");
+                    e.setCancelled(true);
                 }
             }
         }

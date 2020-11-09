@@ -14,21 +14,22 @@ import xyz.yarinlevi.zombieisland.external.nbtapi.NBTAPIHandler;
 import xyz.yarinlevi.zombieisland.external.skills.AureliumSkillsHandler;
 
 public class KopakaListener implements Listener {
-    ItemStack kopakaItem = ZombieIsland.getInstance().getZiSwordsHandler().getSword("kopaka");
-
     @EventHandler
     public void onPlayerHit(EntityDamageByEntityEvent e) {
         if(e.getDamager() instanceof Player) {
 
-            Player attacker = (Player) e.getDamager();
+            Player p = (Player) e.getDamager();
             LivingEntity entity = (LivingEntity) e.getEntity();
 
-            ItemStack item = attacker.getInventory().getItemInMainHand();
+            ItemStack item = p.getInventory().getItemInMainHand();
 
             if (NBTAPIHandler.isItemTagExists(item, "sword.kopaka")) {
-                if (AureliumSkillsHandler.isMeetLevelRequirement(attacker, Skill.FIGHTING, 5)) {
+                if (AureliumSkillsHandler.isMeetLevelRequirement(p, Skill.FIGHTING, 5)) {
                     PotionEffect slowness = new PotionEffect(PotionEffectType.SLOW, (20 * ZombieIsland.getInstance().getKopakaSlownessDuration()), ZombieIsland.getInstance().getKopakaSlownessAmplifier());
                     entity.addPotionEffect(slowness);
+                } else {
+                    ZombieIsland.getInstance().getMessageHandler().sendMessage(p, "level_too_low");
+                    e.setCancelled(true);
                 }
             }
         }
