@@ -30,13 +30,6 @@ public class AdminOnlyCommands implements CommandExecutor {
                 if (args[1].equalsIgnoreCase("save")) {
                     ZombieIsland.getInstance().getLogger().info("Forcibly saving data to MySQL (check that the mysql server wouldn't crash !:D )");
                 }
-            } else if (args[0].equalsIgnoreCase("check")) {
-                if(sender instanceof Player) {
-                    Player p = (Player) sender;
-                    if (args[1].equalsIgnoreCase("nbt")) {
-                        p.sendMessage("Status of the NBT tag you requested: " + NBTAPIHandler.isItemTagExists(p.getInventory().getItemInMainHand(), args[2]));
-                    }
-                }
             } else if (args[0].equalsIgnoreCase("nbt")) {
                 if(sender instanceof Player) {
                     Player p = (Player) sender;
