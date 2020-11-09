@@ -8,6 +8,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
 import xyz.yarinlevi.zombieisland.ZombieIsland;
+import xyz.yarinlevi.zombieisland.external.nbtapi.NBTAPIHandler;
 import xyz.yarinlevi.zombieisland.external.skills.AureliumSkillsHandler;
 
 public class FireSwordListener implements Listener {
@@ -22,7 +23,7 @@ public class FireSwordListener implements Listener {
 
             ItemStack item = attacker.getInventory().getItemInMainHand();
 
-            if (item.equals(fireSwordItem)) {
+            if (NBTAPIHandler.isItemTagExists(item, "sword.firesword")) {
                 if (AureliumSkillsHandler.isMeetLevelRequirement(attacker, Skill.FIGHTING, 5)) {
                     entity.setFireTicks((ZombieIsland.getInstance().getFireSwordBurn() * 20));
                 }

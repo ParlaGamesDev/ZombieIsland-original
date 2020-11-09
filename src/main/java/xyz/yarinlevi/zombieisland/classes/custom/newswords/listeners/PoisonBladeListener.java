@@ -13,6 +13,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import xyz.yarinlevi.zombieisland.ZombieIsland;
 import xyz.yarinlevi.zombieisland.classes.custom.swords.utils.Utils;
+import xyz.yarinlevi.zombieisland.external.nbtapi.NBTAPIHandler;
 import xyz.yarinlevi.zombieisland.external.skills.AureliumSkillsHandler;
 
 public class PoisonBladeListener implements Listener {
@@ -27,7 +28,7 @@ public class PoisonBladeListener implements Listener {
 
             ItemStack item = attacker.getInventory().getItemInMainHand();
 
-            if (item.equals(poisonBladeItem)) {
+            if (NBTAPIHandler.isItemTagExists(item, "sword.poisonblade")) {
                 if (AureliumSkillsHandler.isMeetLevelRequirement(attacker, Skill.FIGHTING, 5)) {
                     if(Utils.calculateChance(3)) {
                         PotionEffect effect;

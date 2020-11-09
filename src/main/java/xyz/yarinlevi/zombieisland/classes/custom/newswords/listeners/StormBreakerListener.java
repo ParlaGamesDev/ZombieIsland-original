@@ -24,7 +24,7 @@ public class StormBreakerListener implements Listener {
 
             ItemStack item = attacker.getInventory().getItemInMainHand();
 
-            if (NBTAPIHandler.isTagExists(item, "sword.stormbreaker")) {
+            if (NBTAPIHandler.isItemTagExists(item, "sword.stormbreaker")) {
                 if (AureliumSkillsHandler.isMeetLevelRequirement(attacker, Skill.FIGHTING, 5)) {
                     if (Utils.calculateChance(3)) {
                         entity.getWorld().strikeLightning(entity.getLocation());

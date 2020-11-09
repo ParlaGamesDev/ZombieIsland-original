@@ -10,6 +10,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import xyz.yarinlevi.zombieisland.ZombieIsland;
+import xyz.yarinlevi.zombieisland.external.nbtapi.NBTAPIHandler;
 import xyz.yarinlevi.zombieisland.external.skills.AureliumSkillsHandler;
 
 public class KopakaListener implements Listener {
@@ -24,7 +25,7 @@ public class KopakaListener implements Listener {
 
             ItemStack item = attacker.getInventory().getItemInMainHand();
 
-            if (item.equals(kopakaItem)) {
+            if (NBTAPIHandler.isItemTagExists(item, "sword.kopaka")) {
                 if (AureliumSkillsHandler.isMeetLevelRequirement(attacker, Skill.FIGHTING, 5)) {
                     PotionEffect slowness = new PotionEffect(PotionEffectType.SLOW, (20 * ZombieIsland.getInstance().getKopakaSlownessDuration()), ZombieIsland.getInstance().getKopakaSlownessAmplifier());
                     entity.addPotionEffect(slowness);

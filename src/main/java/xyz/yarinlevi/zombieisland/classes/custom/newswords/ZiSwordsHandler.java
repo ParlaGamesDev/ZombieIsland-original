@@ -12,9 +12,9 @@ public class ZiSwordsHandler {
 
     public ZiSwordsHandler() {
         swords.put("stormbreaker", Utils.createItemWithNBTTag("sword.stormbreaker", Material.getMaterial(ZombieIsland.getInstance().getStormBreaker_Material()), 1, ZombieIsland.getInstance().getStormBreaker()));
-        swords.put("firesword", Utils.createItem(Material.getMaterial(ZombieIsland.getInstance().getFireSword_Material()), 1, ZombieIsland.getInstance().getFireSword()));
-        swords.put("kopaka", Utils.createItem(Material.getMaterial(ZombieIsland.getInstance().getKopaka_Material()), 1, ZombieIsland.getInstance().getKopaka()));
-        swords.put("poisonblade", Utils.createItem(Material.getMaterial(ZombieIsland.getInstance().getPoisonWand_Material()), 1, ZombieIsland.getInstance().getPoisonWand()));
+        swords.put("firesword", Utils.createItemWithNBTTag("sword.firesword", Material.getMaterial(ZombieIsland.getInstance().getFireSword_Material()), 1, ZombieIsland.getInstance().getFireSword()));
+        swords.put("kopaka", Utils.createItemWithNBTTag("sword.kopaka", Material.getMaterial(ZombieIsland.getInstance().getKopaka_Material()), 1, ZombieIsland.getInstance().getKopaka()));
+        swords.put("poisonblade", Utils.createItemWithNBTTag("sword.poisonblade", Material.getMaterial(ZombieIsland.getInstance().getPoisonWand_Material()), 1, ZombieIsland.getInstance().getPoisonWand()));
     }
 
     public ItemStack getSword(String key) {

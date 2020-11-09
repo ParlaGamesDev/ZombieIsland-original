@@ -44,6 +44,6 @@ public class Utils {
 
         item.setItemMeta(meta);
 
-        return NBTAPIHandler.setCustomTag(item, nbtTag);
+        return NBTAPIHandler.addCustomTag(item, nbtTag);
     }
 }

@@ -4,6 +4,7 @@ main: xyz.yarinlevi.zombieisland.ZombieIsland
 api-version: 1.16
 depend:
   - AureliumSkills
+  - NBTAPI
 
 commands:
   testmessages:

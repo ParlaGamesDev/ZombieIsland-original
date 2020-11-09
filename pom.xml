@@ -6,7 +6,7 @@
 
     <groupId>xyz.yarinlevi</groupId>
     <artifactId>ZombieIsland</artifactId>
-    <version>0.2.6-EXPERIMENTAL</version>
+    <version>0.2.8-EXPERIMENTAL</version>
     <packaging>jar</packaging>
 
     <name>ZombieIsland</name>
@@ -32,10 +32,6 @@
                         <relocation>
                             <pattern>co.aikar.locales</pattern>
                             <shadedPattern>xyz.yarinlevi.zombieisland.locales</shadedPattern>
-                        </relocation>
-                        <relocation>
-                            <pattern>de.tr7zw.changeme.nbtapi</pattern>
-                            <shadedPattern>xyz.yarinlevi.zombieisland.nbtapi</shadedPattern>
                         </relocation>
                     </relocations>
                 </configuration>
@@ -133,7 +129,7 @@
         <dependency>
             <groupId>com.github.Archy-x</groupId>
             <artifactId>AureliumSkills</artifactId>
-            <version>Alpha1.5.0</version>
+            <version>Alpha1.5.1</version>
         </dependency>
         <dependency>
             <groupId>io.lumine.xikage</groupId>
