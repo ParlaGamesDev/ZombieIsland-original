@@ -22,10 +22,11 @@ public class FireSwordListener implements Listener {
             ItemStack item = p.getInventory().getItemInMainHand();
 
             if (NBTAPIHandler.isItemTagExists(item, "sword.firesword")) {
-                if (AureliumSkillsHandler.isMeetLevelRequirement(p, Skill.FIGHTING, 5)) {
+                if (AureliumSkillsHandler.meetsFightingRequirement(p, item)) {
                     entity.setFireTicks((ZombieIsland.getInstance().getFireSwordBurn() * 20));
                 } else {
                     ZombieIsland.getInstance().getMessageHandler().sendMessage(p, "level_too_low");
+                    e.setDamage(1.0);
                     e.setCancelled(true);
                 }
             }

@@ -10,6 +10,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.inventory.ItemStack;
 import xyz.yarinlevi.zombieisland.ZombieIsland;
+import xyz.yarinlevi.zombieisland.external.nbtapi.NBTAPIHandler;
 import xyz.yarinlevi.zombieisland.external.skills.AureliumSkillsHandler;
 
 public class PlayerItemHeldChange implements Listener {
@@ -20,23 +21,21 @@ public class PlayerItemHeldChange implements Listener {
         ItemStack item = event.getPlayer().getInventory().getItem(event.getNewSlot());
 
         if (item != null && !item.getType().equals(Material.AIR)) {
-            if (item.getType().equals(Material.getMaterial(ZombieIsland.getInstance().getStormBreaker_Material()))) {
-                if (item.getItemMeta().getDisplayName().equals(ZombieIsland.getInstance().getStormBreaker())) {
-                    if (AureliumSkillsHandler.isMeetLevelRequirement(player, Skill.FIGHTING, 5)) {
-                        AureliumSkillsHandler.applyModifier(player, "STORMBREAKER", Stat.STRENGTH, 200);
-                    }
+            if (NBTAPIHandler.isItemTagExists(item, "sword.stormbreaker")) {
+                if (AureliumSkillsHandler.meetsFightingRequirement(player, item)) {
+                    AureliumSkillsHandler.applyModifier(player, "STORMBREAKER", Stat.STRENGTH, NBTAPIHandler.getStrengthBoost(item));
                 }
-            } else if (item.getType().equals(Material.getMaterial(ZombieIsland.getInstance().getKopaka_Material()))) {
-                if (item.getItemMeta().getDisplayName().equals(ZombieIsland.getInstance().getKopaka())) {
-                    AureliumSkillsHandler.applyModifier(player, "KOPAKA", Stat.STRENGTH, 50);
+            } else if (NBTAPIHandler.isItemTagExists(item, "sword.kopaka")) {
+                if (AureliumSkillsHandler.meetsFightingRequirement(player, item)) {
+                    AureliumSkillsHandler.applyModifier(player, "KOPAKA", Stat.STRENGTH, NBTAPIHandler.getStrengthBoost(item));
                 }
-            } else if (item.getType().equals(Material.getMaterial(ZombieIsland.getInstance().getFireSword_Material()))) {
-                if (item.getItemMeta().getDisplayName().equals(ZombieIsland.getInstance().getFireSword())) {
-                    AureliumSkillsHandler.applyModifier(player, "FIRESWORD", Stat.STRENGTH, 150);
+            } else if (NBTAPIHandler.isItemTagExists(item, "sword.firesword")) {
+                if (AureliumSkillsHandler.meetsFightingRequirement(player, item)) {
+                    AureliumSkillsHandler.applyModifier(player, "FIRESWORD", Stat.STRENGTH, NBTAPIHandler.getStrengthBoost(item));
                 }
-            } else if (item.getType().equals(Material.getMaterial(ZombieIsland.getInstance().getPoisonWand_Material()))) {
-                if (item.getItemMeta().getDisplayName().equals(ZombieIsland.getInstance().getPoisonWand())) {
-                    AureliumSkillsHandler.applyModifier(player, "POISONWAND", Stat.STRENGTH, 300);
+            } else if (NBTAPIHandler.isItemTagExists(item, "sword.poisonblade")) {
+                if (AureliumSkillsHandler.meetsFightingRequirement(player, item)) {
+                    AureliumSkillsHandler.applyModifier(player, "POISONWAND", Stat.STRENGTH, NBTAPIHandler.getStrengthBoost(item));
                 }
             }
         }

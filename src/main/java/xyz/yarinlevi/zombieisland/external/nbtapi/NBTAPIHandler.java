@@ -1,6 +1,9 @@
 package xyz.yarinlevi.zombieisland.external.nbtapi;
 
+import com.archyx.aureliumskills.skills.Skill;
+import com.archyx.aureliumskills.stats.Stat;
 import de.tr7zw.nbtapi.NBTItem;
+import de.tr7zw.nbtapi.plugin.NBTAPI;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
@@ -21,6 +24,26 @@ public class NBTAPIHandler {
     public static ItemStack addCustomTag(ItemStack item, String key, Object value) {
         NBTItem nbtItem = new NBTItem(item);
         nbtItem.setObject(key, value);
+        return nbtItem.getItem();
+    }
+
+    public static ItemStack addStrengthBoost(ItemStack item, int value) {
+        NBTItem nbtItem = new NBTItem(item);
+        nbtItem.setInteger("strengthBoost", value);
+        return nbtItem.getItem();
+    }
+
+    public static int getStrengthBoost(ItemStack item) {
+        return new NBTItem(item).getInteger("strengthBoost");
+    }
+
+    public static int getLevelRequired(ItemStack item, Skill skill) {
+        return new NBTItem(item).getInteger("zombieisland-levelreq-" + skill.name());
+    }
+
+    public static ItemStack setLevelRequired(ItemStack item, Skill skill, int level) {
+        NBTItem nbtItem = new NBTItem(item);
+        nbtItem.setInteger("zombieisland-levelreq-" + skill.name(), level);
         return nbtItem.getItem();
     }
 

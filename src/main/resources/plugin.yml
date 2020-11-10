@@ -3,7 +3,7 @@ version: ${project.version}
 main: xyz.yarinlevi.zombieisland.ZombieIsland
 api-version: 1.16
 depend:
-  - AureliumSkills
+  - QAureliumSkills
   - NBTAPI
 
 commands:

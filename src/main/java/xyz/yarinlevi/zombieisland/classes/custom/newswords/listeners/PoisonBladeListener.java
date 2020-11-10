@@ -27,8 +27,8 @@ public class PoisonBladeListener implements Listener {
             ItemStack item = p.getInventory().getItemInMainHand();
 
             if (NBTAPIHandler.isItemTagExists(item, "sword.poisonblade")) {
-                if (AureliumSkillsHandler.isMeetLevelRequirement(p, Skill.FIGHTING, 5)) {
-                    if(Utils.calculateChance(3)) {
+                if (AureliumSkillsHandler.meetsFightingRequirement(p, item)) {
+                    if (Utils.calculateChance(3)) {
                         PotionEffect effect;
                         if (entity instanceof Zombie || entity instanceof Skeleton) {
                             effect = new PotionEffect(PotionEffectType.HEAL, (20 * ZombieIsland.getInstance().getPoisonWandDuration()), ZombieIsland.getInstance().getPoisonWandAmplifier());
@@ -43,6 +43,7 @@ public class PoisonBladeListener implements Listener {
                     }
                 } else {
                     ZombieIsland.getInstance().getMessageHandler().sendMessage(p, "level_too_low");
+                    e.setDamage(1.0);
                     e.setCancelled(true);
                 }
             }

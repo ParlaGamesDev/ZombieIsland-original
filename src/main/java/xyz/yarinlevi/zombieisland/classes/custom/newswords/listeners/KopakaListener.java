@@ -24,11 +24,12 @@ public class KopakaListener implements Listener {
             ItemStack item = p.getInventory().getItemInMainHand();
 
             if (NBTAPIHandler.isItemTagExists(item, "sword.kopaka")) {
-                if (AureliumSkillsHandler.isMeetLevelRequirement(p, Skill.FIGHTING, 5)) {
+                if (AureliumSkillsHandler.meetsFightingRequirement(p, item)) {
                     PotionEffect slowness = new PotionEffect(PotionEffectType.SLOW, (20 * ZombieIsland.getInstance().getKopakaSlownessDuration()), ZombieIsland.getInstance().getKopakaSlownessAmplifier());
                     entity.addPotionEffect(slowness);
                 } else {
                     ZombieIsland.getInstance().getMessageHandler().sendMessage(p, "level_too_low");
+                    e.setDamage(1.0);
                     e.setCancelled(true);
                 }
             }
