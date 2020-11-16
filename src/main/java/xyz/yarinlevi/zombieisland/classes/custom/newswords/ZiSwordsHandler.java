@@ -6,6 +6,7 @@ import com.archyx.aureliumskills.stats.Stat;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import xyz.yarinlevi.zombieisland.ZombieIsland;
+import xyz.yarinlevi.zombieisland.classes.custom.newswords.classes.Sword;
 import xyz.yarinlevi.zombieisland.classes.custom.swords.utils.Utils;
 import xyz.yarinlevi.zombieisland.external.nbtapi.NBTAPIHandler;
 
@@ -13,8 +14,13 @@ import java.util.HashMap;
 
 public class ZiSwordsHandler {
     private final HashMap<String, ItemStack> swords = new HashMap<>();
+    private final HashMap<String, Sword> newSwords = new HashMap<>();
 
     public ZiSwordsHandler() {
+        ItemStack testItem1 = Utils.createItem(Material.getMaterial(ZombieIsland.getInstance().getStormBreaker_Material()), 1, ZombieIsland.getInstance().getStormBreaker());
+        Sword testSword = new Sword("sword.testsword", testItem1, 1000, Skill.FIGHTING, 5);
+        newSwords.put("sword.testsword", testSword);
+
         ItemStack stormbreaker = Utils.createItemWithNBTTag("sword.stormbreaker", Material.getMaterial(ZombieIsland.getInstance().getStormBreaker_Material()), 1, ZombieIsland.getInstance().getStormBreaker());
         stormbreaker = NBTAPIHandler.addStrengthBoost(stormbreaker, 400);
         stormbreaker = NBTAPIHandler.setLevelRequired(stormbreaker, Skill.FIGHTING, 20);
@@ -44,4 +50,6 @@ public class ZiSwordsHandler {
     public ItemStack getSword(String key) {
         return swords.getOrDefault(key, new ItemStack(Material.AIR));
     }
+
+    public Sword getModularSword(String key) { return newSwords.getOrDefault(key, new Sword( "zi.void", new ItemStack(Material.AIR), 15, Skill.FIGHTING, 15)); }
 }

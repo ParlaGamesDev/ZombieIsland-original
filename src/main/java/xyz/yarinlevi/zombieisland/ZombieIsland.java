@@ -37,6 +37,7 @@ public final class ZombieIsland extends JavaPlugin {
     @Getter private ZiSwordsHandler ziSwordsHandler;
 
     @Getter private final String version = getDescription().getVersion();
+    @Getter private final String serverVersion = getServerVersion();
 
     //Swords
     @Getter private int kopakaSlownessDuration, kopakaSlownessAmplifier, poisonWandDuration, poisonWandAmplifier, fireSwordBurn;

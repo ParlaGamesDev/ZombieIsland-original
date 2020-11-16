@@ -44,7 +44,7 @@ public class SpawnerManager {
             final Location[] spawnLocation = new Location[1];
             final Block[] blockBelow = new Block[1];
 
-            Bukkit.getScheduler().scheduleSyncRepeatingTask(ZombieIsland.getInstance(), new Runnable() {
+            Bukkit.getScheduler().scheduleAsyncRepeatingTask(ZombieIsland.getInstance(), new Runnable() {
                 @Override
                 public void run() {
                     randomLocation[0] = region.getRandomLocation();
@@ -55,7 +55,7 @@ public class SpawnerManager {
                         spawnLocation[0].add(0, 1, 0);
 
                         if(!blockBelow[0].getBlockData().getMaterial().equals(Material.WATER)) {
-                            if (spawnLocation[0].getChunk().getEntities().length <= ZombieIsland.getInstance().getSettings().getMobLimitPerChunk()) {
+                            if (spawnLocation[0].getChunk().getEntities().length > ZombieIsland.getInstance().getSettings().getMobLimitPerChunk()) {
                                 Handler.spawnCustomTieredMob(mob, spawnLocation[0]);
                             }
                         }

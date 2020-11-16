@@ -26,11 +26,7 @@ public class AdminOnlyCommands implements CommandExecutor {
                         ZombieIsland.getInstance().getLogger().log(Level.SEVERE, "Something went wrong while registering spawners!");
                     }
                 }
-            } else if (args[0].equalsIgnoreCase("force")) {
-                if (args[1].equalsIgnoreCase("save")) {
-                    ZombieIsland.getInstance().getLogger().info("Forcibly saving data to MySQL (check that the mysql server wouldn't crash !:D )");
-                }
-            } else if (args[0].equalsIgnoreCase("nbt")) {
+            }  else if (args[0].equalsIgnoreCase("nbt")) {
                 if(sender instanceof Player) {
                     Player p = (Player) sender;
                     if (args[1].equalsIgnoreCase("set")) {
