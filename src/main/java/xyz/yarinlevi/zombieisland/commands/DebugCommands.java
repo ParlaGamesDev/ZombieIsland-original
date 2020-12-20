@@ -1,15 +1,9 @@
 package xyz.yarinlevi.zombieisland.commands;
 
-import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
-import xyz.yarinlevi.zombieisland.classes.custom.customspawns.entities.Handler;
-import xyz.yarinlevi.zombieisland.classes.custom.customspawns.entities.types.Mob;
-import xyz.yarinlevi.zombieisland.classes.custom.customspawns.helpers.CustomTiers;
-import xyz.yarinlevi.zombieisland.classes.custom.customspawns.regions.RegionHandler;
 
 public class DebugCommands implements CommandExecutor {
     //TODO: Replace messages to new system
@@ -23,10 +17,10 @@ public class DebugCommands implements CommandExecutor {
             final Player p = (Player) sender;
 
             if(args.length != 0) {
-                if(args[0].equalsIgnoreCase("spawn")) {
+                /*if(args[0].equalsIgnoreCase("spawn")) {
                     String entity = args[1].toUpperCase();
                     int tier = Integer.parseInt(args[2].trim());
-                    Mob mob = new Mob(CustomTiers.getTiers().get(tier), null, EntityType.valueOf(entity));
+                    Mob mob = new Mob(CustomTiers.getTiers().get(tier), EntityType.valueOf(entity), 10, args[3]);
 
                     Handler.spawnCustomTieredMob(mob, p.getLocation());
 
@@ -51,11 +45,12 @@ public class DebugCommands implements CommandExecutor {
                     p.sendMessage("In region? " + RegionHandler.isInRegion(p.getLocation()));
                 } else if (args[0].equalsIgnoreCase("test")) {
                     if(args[1].equalsIgnoreCase("placeholders")) {
-                        /*p.sendMessage(Utils.newMessageString(p, "&5level: &a%zombieisland_skill.combat.level%"));
+                        p.sendMessage(Utils.newMessageString(p, "&5level: &a%zombieisland_skill.combat.level%"));
                         p.sendMessage(Utils.newMessageString(p, "&6exp: &e%zombieisland_skill.combat.exp%"));
-                        p.sendMessage(Utils.newMessageString(p, "&7progression &b%zombieisland_skill.combat.progression% &3percent&1.")); */
+                        p.sendMessage(Utils.newMessageString(p, "&7progression &b%zombieisland_skill.combat.progression% &3percent&1."));
                     }
                 }
+                 */
             }
             return true;
         }

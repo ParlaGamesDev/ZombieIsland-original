@@ -1,6 +1,5 @@
 package xyz.yarinlevi.zombieisland.external.skills;
 
-import com.archyx.aureliumskills.AureliumSkills;
 import com.archyx.aureliumskills.api.AureliumAPI;
 import com.archyx.aureliumskills.skills.Skill;
 import com.archyx.aureliumskills.stats.Stat;

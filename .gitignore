@@ -50,3 +50,6 @@ target/
 .idea/libraries/item_nbt_api_plugin_2_6_0.xml
 .idea/libraries/Maven__com_github_Archy_x_AureliumSkills_Alpha1_5_0.xml
 .idea/libraries/AureliumSkills_Alpha1_5_1_FORKED_BY_QUAPI.xml
+.idea/discord.xml
+.idea/libraries/Maven__org_spigotmc_spigot_api_1_16_4_R0_1_SNAPSHOT.xml
+.idea/artifacts/ZombieIsland_jar.xml

@@ -2,9 +2,10 @@
   <artifact type="jar" name="ZombieIsland:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/ZombieIsland_jar</output-path>
     <root id="archive" name="ZombieIsland.jar">
-      <element id="module-output" name="ZombieIsland" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/slf4j/slf4j-api/1.7.25/slf4j-api-1.7.25.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/co/aikar/acf-bukkit/0.5.0-SNAPSHOT/acf-bukkit-0.5.0-20200925.132015-173.jar" path-in-jar="/" />
+      <element id="library" level="project" name="Maven: de.tr7zw:item-nbt-api-plugin:2.6.0" />
+      <element id="module-output" name="ZombieIsland" />
     </root>
   </artifact>
 </component>

@@ -5,17 +5,16 @@ api-version: 1.16
 depend:
   - QAureliumSkills
   - NBTAPI
+  - MythicMobs
 
 commands:
   testmessages:
-    permission: op
+    permission: zombieisland.admin.debug.messages
   zidebug:
     permission: zombieisland.admin.debug
   ziadmin:
     permission: zombieisland.admin
   ziswords:
     permission: zombieisland.admin.swords
-
-permissions:
-  op:
-    default: op
+  zipoints:
+    permission: zombieisland.admin.points

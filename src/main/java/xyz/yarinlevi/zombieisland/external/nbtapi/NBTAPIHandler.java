@@ -1,9 +1,7 @@
 package xyz.yarinlevi.zombieisland.external.nbtapi;
 
 import com.archyx.aureliumskills.skills.Skill;
-import com.archyx.aureliumskills.stats.Stat;
 import de.tr7zw.nbtapi.NBTItem;
-import de.tr7zw.nbtapi.plugin.NBTAPI;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;

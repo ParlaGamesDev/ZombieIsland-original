@@ -6,7 +6,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import xyz.yarinlevi.zombieisland.ZombieIsland;
-import xyz.yarinlevi.zombieisland.classes.custom.customspawns.regions.SpawnerManager;
 import xyz.yarinlevi.zombieisland.external.nbtapi.NBTAPIHandler;
 
 import java.util.logging.Level;
@@ -19,7 +18,7 @@ public class AdminOnlyCommands implements CommandExecutor {
             if (args[0].equalsIgnoreCase("register")) {
                 if (args[1].equalsIgnoreCase("spawners")) {
                     try {
-                        SpawnerManager.registerSpawners();
+                        //SpawnerManager.registerSpawners();
                         ZombieIsland.getInstance().getLogger().log(Level.INFO, "ZiSpawners were successfully registered.");
                     } catch (Exception e) {
                         e.printStackTrace();

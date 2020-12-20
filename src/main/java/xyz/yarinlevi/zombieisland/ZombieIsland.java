@@ -1,33 +1,29 @@
 package xyz.yarinlevi.zombieisland;
 
+import io.lumine.xikage.mythicmobs.MythicMobs;
 import lombok.Getter;
 import org.bukkit.Bukkit;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
-import xyz.yarinlevi.zombieisland.classes.FileManager;
-import xyz.yarinlevi.zombieisland.classes.Settings;
-import xyz.yarinlevi.zombieisland.classes.custom.customspawns.helpers.CustomMobs;
-import xyz.yarinlevi.zombieisland.classes.custom.customspawns.helpers.CustomTiers;
-import xyz.yarinlevi.zombieisland.classes.custom.customspawns.regions.RegionHandler;
-import xyz.yarinlevi.zombieisland.classes.custom.newswords.ZiSwordsHandler;
-import xyz.yarinlevi.zombieisland.classes.custom.newswords.listeners.FireSwordListener;
-import xyz.yarinlevi.zombieisland.classes.custom.newswords.listeners.KopakaListener;
-import xyz.yarinlevi.zombieisland.classes.custom.newswords.listeners.PoisonBladeListener;
-import xyz.yarinlevi.zombieisland.classes.custom.newswords.listeners.StormBreakerListener;
-import xyz.yarinlevi.zombieisland.classes.custom.swords.ZiSwordsCommand;
-import xyz.yarinlevi.zombieisland.classes.custom.swords.listeners.PlayerItemHeldChange;
-import xyz.yarinlevi.zombieisland.classes.custom.swords.listeners.PlayerItemHeldChange2;
-import xyz.yarinlevi.zombieisland.classes.listeners.EntityCombust;
-import xyz.yarinlevi.zombieisland.classes.listeners.OnPlayerJoin;
-import xyz.yarinlevi.zombieisland.classes.messages.MessageHandler;
-import xyz.yarinlevi.zombieisland.classes.messages.PlaceholderHandler;
-import xyz.yarinlevi.zombieisland.classes.permissions.PermissionHandler;
+import xyz.yarinlevi.zombieisland.handlers.Settings;
+import xyz.yarinlevi.zombieisland.handlers.custom.customspawns.MythicMobsHandler;
+import xyz.yarinlevi.zombieisland.handlers.custom.customspawns.spawnersv2.commands.PointCommand;
+import xyz.yarinlevi.zombieisland.handlers.custom.newswords.ZiSwordsHandler;
+import xyz.yarinlevi.zombieisland.handlers.custom.newswords.listeners.FireSwordListener;
+import xyz.yarinlevi.zombieisland.handlers.custom.newswords.listeners.KopakaListener;
+import xyz.yarinlevi.zombieisland.handlers.custom.newswords.listeners.PoisonBladeListener;
+import xyz.yarinlevi.zombieisland.handlers.custom.newswords.listeners.StormBreakerListener;
+import xyz.yarinlevi.zombieisland.handlers.custom.swords.ZiSwordsCommand;
+import xyz.yarinlevi.zombieisland.handlers.custom.swords.listeners.PlayerItemHeldChange;
+import xyz.yarinlevi.zombieisland.handlers.custom.swords.listeners.PlayerItemHeldChange2;
+import xyz.yarinlevi.zombieisland.handlers.listeners.EntityCombust;
+import xyz.yarinlevi.zombieisland.handlers.listeners.OnPlayerJoin;
+import xyz.yarinlevi.zombieisland.handlers.messages.MessageHandler;
+import xyz.yarinlevi.zombieisland.handlers.messages.PlaceholderHandler;
+import xyz.yarinlevi.zombieisland.handlers.permissions.PermissionHandler;
 import xyz.yarinlevi.zombieisland.commands.AdminOnlyCommands;
 import xyz.yarinlevi.zombieisland.commands.DebugCommands;
 import xyz.yarinlevi.zombieisland.commands.TestMessages;
-
-import java.io.File;
 
 public final class ZombieIsland extends JavaPlugin {
     @Getter private static ZombieIsland instance;
@@ -35,6 +31,7 @@ public final class ZombieIsland extends JavaPlugin {
     @Getter private MessageHandler messageHandler;
     @Getter private Settings settings;
     @Getter private ZiSwordsHandler ziSwordsHandler;
+    @Getter private MythicMobsHandler mythicMobsHandler;
 
     @Getter private final String version = getDescription().getVersion();
     @Getter private final String serverVersion = getServerVersion();
@@ -62,7 +59,7 @@ public final class ZombieIsland extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(permissionHandler, this);
 
         // Data initialization
-        this.initializeData();
+        //this.initializeData();
 
         //PlaceholderAPI registration
         if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) new PlaceholderHandler(this).register();
@@ -96,6 +93,15 @@ public final class ZombieIsland extends JavaPlugin {
         getCommand("zidebug").setExecutor(new DebugCommands());
         getCommand("testmessages").setExecutor(new TestMessages());
         getCommand("ziswords").setExecutor(new ZiSwordsCommand());
+        getCommand("zipoints").setExecutor(new PointCommand());
+
+        if (Bukkit.getPluginManager().getPlugin("MythicMobs") != null) {
+            MythicMobs mm = (MythicMobs) Bukkit.getPluginManager().getPlugin("MythicMobs");
+
+            mythicMobsHandler = new MythicMobsHandler(mm);
+
+
+        }
 
         //SpawnerManager.registerSpawners();
     }
@@ -106,6 +112,7 @@ public final class ZombieIsland extends JavaPlugin {
     }
 
     private void initializeData() {
+        /*
         CustomTiers.setFile(new File(ZombieIsland.getInstance().getDataFolder(), "MobTiers.yml"));
         CustomTiers.setData(YamlConfiguration.loadConfiguration(CustomTiers.getFile()));
 
@@ -127,6 +134,7 @@ public final class ZombieIsland extends JavaPlugin {
         CustomTiers.loadTiers();
         CustomMobs.loadMobs();
         RegionHandler.loadRegions();
+         */
     }
 
     public void registerSwordData() {
